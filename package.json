@@ -1,0 +1,10 @@
+{
+  "name": "substrate-tx-seed",
+  "version": "1.0.0",
+  "description": "Library of scripts to seed a substrate based dev node.",
+  "main": "index.js",
+  "repository": "https://github.com/emostov/substrate-tx-seed.git",
+  "author": "Zeke Mostov <emostov@middlebury.edu>",
+  "license": "MIT",
+  "private": false
+}
