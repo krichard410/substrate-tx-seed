@@ -29,6 +29,7 @@ async function main(): Promise<AccountAndBlock[]> {
 	// info = info.concat(await proxy(api));
 
 	// info = info.concat(await session(api));
+
 	info = info.concat(await system(api));
 
 	// Ideally would feed data into reconciler to check the specific blocks.
