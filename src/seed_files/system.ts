@@ -25,7 +25,9 @@ export async function system(api: ApiPromise): Promise<AccountAndBlock[]> {
 	console.log('\n unappliedSlash: ', unappliedSlash.toHuman());
 
 	const slashVec = api.createType('Vec<UnappliedSlash>', [unappliedSlash]);
+
 	console.log('\n slashVec: ', slashVec.toHuman());
+
 	const era = api.createType('EraIndex', 0);
 
 	// For our reference, this is the storage key for UnappliedSlashes
