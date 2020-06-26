@@ -10,6 +10,24 @@ import { AccountAndBlock } from '../constants_and_types/types';
 export async function session(api: ApiPromise): Promise<AccountAndBlock[]> {
 	const info: AccountAndBlock[] = [];
 	// const keys: Accounts = await createAccounts();
+	const unappliedSlash = api.createType('UnappliedSlash', {
+		validator: '5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY',
+		own: 1_000_000_000,
+		others: [],
+		payout: 1_000_000_000,
+	});
+
+	const slashVec = api.createType('Vec<UnappliedSlash>', [unappliedSlash]);
+
+	const slashMap = api.createType('MapTypeLatest', {
+		hasher: api.createType('StorageHasherV11', 'Twox64Concat'),
+		key: api.createType('EraIndex', 1),
+		linked: true,
+		value: slashVec,
+	});
+
+	console.log(slashMap.toString());
+	// api.tx.system.setStorage();
 
 	// const newKeys = await api.rpc.author.rotateKeys();
 

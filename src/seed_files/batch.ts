@@ -23,8 +23,8 @@ export async function batch(api: ApiPromise): Promise<AccountAndBlock[]> {
 	]);
 
 	const batchTx = [
-		api.tx.balances.transfer(keys.bob.address, 718),
-		nestedBatchTx,
+		api.tx.balances.transfer(keys.bob.address, 1_000_000_000),
+		// nestedBatchTx,
 	];
 
 	const batch = api.tx.utility.batch(batchTx);
