@@ -29,3 +29,19 @@ yarn lint
 ```
 yarn lint --fix
 ```
+
+## Sending Transfers and Adding in your own generated accounts
+
+First, ensure that you have a dev chain running in another terminal: `./target/release/polkadot --dev`. 
+
+To add in your own account generated through subkey, head over to the `createAccounts` file, and switch out the mnemonic seed in there with your own. Inside the `main.ts` file, if you `console.log(keys.account Name here.toJson());` this will return data about your account. 
+
+To send a transfer, you need to make some changes in the `transfer.ts` file:
+
+```
+const transferTo = api.tx.balances.transfer(keys.ACCOUNT RECEIVER NAME.address, 1060 * UNIT);
+const batch = api.tx.utility.batch([transferTo]);
+const txInfo = await signAndSendInfo(api, batch, keys.alice); 
+// above: send units from Alice to batch (you need to change the account reciever value to the account you want to transfer to
+```
+Then inside `main.ts`, you need to call `info = info.concat(await transfer(api));` to be able to send the transfer. When `yarn start` is running, it will return the block number and the address of that transaction, which you can see on the Polkadot.js UI.
