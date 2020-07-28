@@ -4,7 +4,7 @@ import { AccountAndBlock } from './constants_and_types/types';
 // import { batch } from './seed_files/batch';
 // import { session } from './seed_files/session';
 // import { system } from './seed_files/system';
-import { createAccounts, Accounts } from './methods/createAccounts';
+import { Accounts, createAccounts } from './methods/createAccounts';
 // import { proxy } from './seed_files/proxy';
 // import { staking } from './seed_files/staking';
 // import { sudo } from './seed_files/sudo';
@@ -18,7 +18,7 @@ async function main(): Promise<AccountAndBlock[]> {
 	const api = await ApiPromise.create({ provider: wsProvider });
 
 	let info: AccountAndBlock[] = [];
-	let keys: Accounts = await createAccounts();
+	const keys: Accounts = await createAccounts();
 
 	info = info.concat(await transfer(api));
 
@@ -34,7 +34,7 @@ async function main(): Promise<AccountAndBlock[]> {
 
 	// info = info.concat(await system(api));
 	//console.log(info);
-	console.log(keys.eve.toJson());
+	console.log(`Eve: ${keys.eve.toJson().address}`);
 	console.log(keys.dave.toJson());
 	console.log(keys.bob.toJson());
 	console.log(keys.sagan.toJson());
@@ -44,4 +44,9 @@ async function main(): Promise<AccountAndBlock[]> {
 	return info;
 }
 
-main().then(console.log).catch(console.error);
+main()
+	.then(console.log)
+	.catch((error) => {
+		console.error(error);
+		process.exit(1);
+	});
