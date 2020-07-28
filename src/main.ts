@@ -34,7 +34,7 @@ async function main(): Promise<AccountAndBlock[]> {
 
 	// info = info.concat(await system(api));
 	//console.log(info);
-	console.log(keys.eve.toJson());
+	console.log(`Eve: ${keys.eve.toJson().address}`);
 	console.log(keys.dave.toJson());
 	console.log(keys.bob.toJson());
 	console.log(keys.sagan.toJson());
